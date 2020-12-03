@@ -5,8 +5,6 @@ function calc2(data, result=2020) {
     let set = new Set()
     set.add(data.shift())
 
-    console.log(set)
-
     for (let i = 0; i < data.length; i++) {
         if (set.has(result - data[i])) {
             return [data[i], result - data[i]]
@@ -45,7 +43,6 @@ function two() {
     let data = DataAnalyzer.ints("2020/day1.txt")
     answer = calc3(data)
     console.log("(2020.2): " + answer[0] * answer[1] * answer[2])
-    console.log(answer)
 }
 
 
