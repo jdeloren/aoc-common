@@ -95,9 +95,7 @@ def passports(data, detailed=False):
             if entry[0] not in optional:
                 current[entry[0]] = entry[1]
 
-    valid += is_valid(current, detailed)
-
-    return valid
+    return valid + is_valid(current, detailed)
 
 
 def second():
