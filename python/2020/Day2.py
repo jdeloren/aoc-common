@@ -32,26 +32,11 @@ def index_check(data):
 
 
 def second():
-    data = [
-        "1-3 a: abcde",
-        "1-3 b: cdefg",
-        "2-9 c: ccccccccc"
-    ]
-    print("(2.2.0) test valid passwords is {:d}".format(index_check(data)))
-
     data = DataAnalyzer.load("2020/day2.txt")
     print("(2.2) test valid passwords is {:d}".format(index_check(data)))
 
 
 def first():
-    data = [
-        "1-3 a: abcde",
-        "1-3 b: cdefg",
-        "2-9 c: ccccccccc"
-    ]
-
-    print("(2.1.0) test valid passwords is {:d}".format(bound_check(data)))
-
     data = DataAnalyzer.load("2020/day2.txt")
     print("(2.1) valid passwords is {:}".format(bound_check(data)))
 
