@@ -28,23 +28,20 @@ class Program:
 
     def execute(self):
         if self.terminator is not None and self.terminator(self.pointer):
-            print("TERMINATED on duplicate instruction: {:d}, {:d}".format(self.accumulator, self.pointer))
+            print("TERMINATED on duplicate instruction: {:d} @ {:d}".format(self.accumulator, self.pointer))
             self._terminated = True
             return
 
         if self.pointer >= len(self.instructions):
+            print("TERMINATED on pointer indexing: {:d} @ {:d}".format(self.accumulator, self.pointer))
             self._terminated = True
-            print("TERMINATED on pointer indexing: {:d} @ {:d}".format(self.pointer, self.accumulator))
             return
 
         self._executed.append(self.pointer)
-        instruction = self.instructions[self.pointer]
-        # print("PROCESSING {:s}".format(instruction))
 
-        i = instruction.split(' ')
+        i = self.instructions[self.pointer].split(' ')
         command = i[0]
         value = int(i[1:][0])
-        # print("MOD: {:d} from {:} is {:d} << {:d}".format(mod, i, value, int(i[1:][0])))
 
         if command == 'nop':
             print("NO-OP {:d}".format(value)) if self.debug else None
@@ -75,7 +72,6 @@ class Program:
 
     def run(self):
         self.reset()
-        # print("START: {:} {:}".format(not self._terminated, len(self._executed) < self.depth))
         while not self._terminated and len(self._executed) < self.depth:
             self.execute()
 
