@@ -12,35 +12,27 @@ def nesting(luggage, target):
     return bags
 
 
-def pack(data, target, suitcase={}, depth=1):
-    # print("TARGET: {:s} => {:}".format(target, suitcase))
-    for value in data[target]:
-        # print('CHECKING BAG: {:}'.format(value))
-        count = 1 if value[0].isalpha() else int(value.split(' ')[0])
-        style = target if value[0].isalpha() else value[2:]
+def pack(data, target, base=1, suitcase={}, depth=1):
+    for key, value in data[target].items():
 
-        if 'no other' not in value:
-            suitcase[style] = suitcase.get(style, 0) + (count * suitcase[target])
-            pack(data, value[2:], suitcase, depth+1)
+        if 'other' not in key:
+            suitcase[key] = suitcase.get(key, 0) + value * base
+            pack(data, key, value * base, suitcase, depth+1)
     
     return suitcase
 
 
 def packer(file, target='shiny gold bag'):
     data = DataAnalyzer.text("2020/" + file)
-    patterns(data)
-    exit(0)
-    luggage = pack(patterns(data), target, {target : 1})
+    luggage = pack(patterns(data), target, 1, {target : 1})
 
     return nesting(luggage, target)
 
 
 def options(data, target, current):
-    check = []
-
     for key, values in data.items():
-        for value in values:
-            if target in value:
+        for k, v in values.items():
+            if target == k:
                 current.add(key)
                 options(data, key, current)
 
@@ -49,11 +41,11 @@ def options(data, target, current):
 
 def create_entry(data):
     if ['no other bag'] == data:
-        entry = {0: 'other bags'}
+        entry = {'other bags': 0}
     else:
         entry = {}
         for i in data:
-            entry[int(i[:2])] = i[2:]
+            entry[i[2:]] = int(i[:2])
 
     return entry
 
@@ -63,15 +55,14 @@ def patterns(data):
 
     for x in data:
         temp = x.replace('bags', 'bag').split('contain')
-        patterns[temp[0][:-1]] = temp[1][1:-1].split(', ')
-        # patterns[temp[0][:-1]] = create_entry(temp[1][1:-1].split(', '))
+        patterns[temp[0][:-1]] = create_entry(temp[1][1:-1].split(', '))
     
     return patterns
 
 
 def second():
-    # print("(7.2.0) {:d} bags inside shiny gold bag".format(packer('day0.txt')))
-    # print("(7.2.99) {:d} bags inside shiny gold bag".format(packer('day99.txt')))
+    print("(7.2.0) {:d} bags inside shiny gold bag".format(packer('day0.txt')))
+    print("(7.2.99) {:d} bags inside shiny gold bag".format(packer('day99.txt')))
     print("(7.2) {:d} bags inside shiny gold bag".format(packer('day7.txt')))
 
 
@@ -83,7 +74,9 @@ def first():
 
 def solve(puzzle):
 
-    if puzzle == '1':
+    if puzzle == '0':
+        third()
+    elif puzzle == '1':
         first()
     elif puzzle == '2':
         second()
