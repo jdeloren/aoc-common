@@ -2,17 +2,26 @@ import sys
 from common import DataAnalyzer
 
 
+def weakness(data, index):
+    total = data[index]
+    for i in range(0, index):
+        for j in range(i, index):
+            if sum(data[i:j]) == total:
+                return min(data[i:j]) + max(data[i:j])
+    
+    return -1
+
+
 def checker(total, subset, index):
     s2 = subset.copy()
     return total - s2.pop(index) in s2
 
 
 def hackXMAS(data, preamble=5):
-    built[]
     for i in range(preamble, len(data)):
         total = data[i]
         found = False
-        for j in range(i-preamble, i):
+        for j in range(preamble):
             if checker(total, data[i-preamble:i], j):
                 found = True
                 break
@@ -23,14 +32,15 @@ def hackXMAS(data, preamble=5):
     return -1
 
 def second():
-    pass
+    data = DataAnalyzer.ints("2020/day9.txt")
+    answer = hackXMAS(data, 25)
+    print("(9.2) Attack vector: {:}".format(weakness(data, answer)))
     
 
 def first():
-    print("(9.1) program execution")
     data = DataAnalyzer.ints("2020/day9.txt")
-    data = [35,20,15,25,47,40,62,55,65,95,102,117,150,182,127,219,299,277,309,576]
-    hackXMAS(data)
+    answer = hackXMAS(data, 25)
+    print("(9.1) Gap found at {:d} => {:d}".format(answer, data[answer]))
 
 
 def solve(puzzle):
