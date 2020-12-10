@@ -39,12 +39,7 @@ def options(data, target, current):
 
 
 def create_entry(data):
-    if ['no other bag'] == data:
-        entry = {'other bags': 0}
-    else:
-        entry = {i[2:] : int(i[:2]) for i in data}
-
-    return entry
+    return {'other bags': 0} if data == ['no other bag'] else {i[2:] : int(i[:2]) for i in data}
 
 
 def patterns(data):
