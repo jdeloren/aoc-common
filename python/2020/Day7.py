@@ -5,16 +5,15 @@ from common import DataAnalyzer
 def nesting(luggage, target):
     bags = 0
 
-    del luggage[target]
+    del luggage[target] 
     for key, value in luggage.items():
         bags += value
-
+    
     return bags
 
 
 def pack(data, target, base=1, suitcase={}, depth=1):
     for key, value in data[target].items():
-
         if 'other' not in key:
             suitcase[key] = suitcase.get(key, 0) + value * base
             pack(data, key, value * base, suitcase, depth+1)
@@ -43,9 +42,7 @@ def create_entry(data):
     if ['no other bag'] == data:
         entry = {'other bags': 0}
     else:
-        entry = {}
-        for i in data:
-            entry[i[2:]] = int(i[:2])
+        entry = {i[2:] : int(i[:2]) for i in data}
 
     return entry
 
@@ -74,9 +71,7 @@ def first():
 
 def solve(puzzle):
 
-    if puzzle == '0':
-        third()
-    elif puzzle == '1':
+    if puzzle == '1':
         first()
     elif puzzle == '2':
         second()
