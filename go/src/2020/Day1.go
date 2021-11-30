@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	DataAnalyzer "github.com/jdeloren/aoc-common/common"
+	DataAnalyzer "common"
 )
 
 func part1() {
