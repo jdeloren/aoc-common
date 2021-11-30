@@ -1,4 +1,4 @@
-const {DataAnalyzer} = require('./DataAnalyzer.js')
+const {DataAnalyzer} = require('../common/DataAnalyzer.js')
 let data = DataAnalyzer.ints("2020/day1.txt")
 
 function calc2(result=2020) {
