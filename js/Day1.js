@@ -1,11 +1,11 @@
 const {DataAnalyzer} = require('./DataAnalyzer.js')
+let data = DataAnalyzer.ints("2020/day1.txt")
 
-
-function calc2(data, result=2020) {
+function calc2(result=2020) {
     let set = new Set()
     set.add(data.shift())
 
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i <= data.length; i++) {
         if (set.has(result - data[i])) {
             return [data[i], result - data[i]]
         }
@@ -16,8 +16,8 @@ function calc2(data, result=2020) {
     return [-1, -1]
 }
 
-function calc3(data, result=2020) {
-    for (let i = 0; i < data.length - 1; i++) {
+function calc3(result=2020) {
+    for (let i = 0; i <= data.length - 1; i++) {
         let set = new Set()
         total = result - data[i]
 
@@ -34,24 +34,22 @@ function calc3(data, result=2020) {
 }
 
 function one() {
-    let data = DataAnalyzer.ints("2020/day1.txt")
-    answer = calc2(data)
+    answer = calc2()
     console.log("(2020.1): " + answer[0] * answer[1])
 }
 
 function two() {
-    let data = DataAnalyzer.ints("2020/day1.txt")
-    answer = calc3(data)
+    answer = calc3()
     console.log("(2020.2): " + answer[0] * answer[1] * answer[2])
 }
 
 
 switch(process.argv.slice(2)[0]) {
-    case 1:
+    case '1':
         one();
         break;
 
-    case 2:
+    case '2':
         two();
         break;
     
