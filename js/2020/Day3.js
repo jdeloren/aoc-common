@@ -45,5 +45,4 @@ switch(process.argv.slice(2)[0]) {
     default:
         one();
         two();
-        break;
 }
