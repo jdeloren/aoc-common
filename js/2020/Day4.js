@@ -77,12 +77,12 @@ function calc(scan=blind) {
 
 function one() {
     answer = calc()
-    console.log("(2020.4): " + answer)
+    console.log("(2020.4.1): " + answer)
 }
 
 function two() {
     answer = calc(strict)
-    console.log("(2020.4): " + answer)
+    console.log("(2020.4.2): " + answer)
 }
 
 switch(process.argv.slice(2)[0]) {

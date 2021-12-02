@@ -43,11 +43,11 @@ function calc(tabulator=max) {
 }
 
 function one() {
-    console.log("(2020.5): " + calc(max))
+    console.log("(2020.5.1): " + calc(max))
 }
 
 function two() {
-    console.log("(2020.5): " + calc(unique))
+    console.log("(2020.5.2): " + calc(unique))
 }
 
 switch(process.argv.slice(2)[0]) {

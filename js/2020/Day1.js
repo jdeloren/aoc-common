@@ -35,12 +35,12 @@ function calc3(result=2020) {
 
 function one() {
     answer = calc2()
-    console.log("(2020.1): " + answer[0] * answer[1])
+    console.log("(2020.1.1): " + answer[0] * answer[1])
 }
 
 function two() {
     answer = calc3()
-    console.log("(2020.2): " + answer[0] * answer[1] * answer[2])
+    console.log("(2020.2.2): " + answer[0] * answer[1] * answer[2])
 }
 
 

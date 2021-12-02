@@ -22,12 +22,12 @@ function builder() {
 
 function one() {
     answer = basic()
-    console.log("(2021.1): " + answer)
+    console.log("(2021.1.1): " + answer)
 }
 
 function two() {
     answer = builder()
-    console.log("(2020.2): " + answer)
+    console.log("(2021.1.2): " + answer)
 }
 
 

@@ -34,12 +34,12 @@ function pos(one, two, chr, passwd) {
 
 function one() {
     answer = calc()
-    console.log("(2020.1): " + answer)
+    console.log("(2020.1.1): " + answer)
 }
 
 function two() {
     answer = calc(pos)
-    console.log("(2020.2): " + answer)
+    console.log("(2020.2.2): " + answer)
 }
 
 switch(process.argv.slice(2)[0]) {

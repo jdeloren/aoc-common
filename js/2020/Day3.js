@@ -19,7 +19,7 @@ function calc(x=0, y=0, i=3, j=1) {
 
 function one() {
     answer = calc()
-    console.log("(2020.3): " + answer)
+    console.log("(2020.3.1): " + answer)
 }
 
 function two() {
@@ -30,7 +30,7 @@ function two() {
         answer *= calc(0, 0, slope[0], slope[1])
     });
 
-    console.log("(2020.3): " + answer)
+    console.log("(2020.3.2): " + answer)
 }
 
 switch(process.argv.slice(2)[0]) {
