@@ -55,13 +55,11 @@ function power() {
 }
 
 function one() {
-    answer = power()
-    console.log("(2021.3.1): " + answer)
+    console.log("(2021.3.1): " + power())
 }
 
 function two() {
-    answer = life_support()
-    console.log("(2021.3.2): " + answer)
+    console.log("(2021.3.2): " + life_support())
 }
 
 
