@@ -2,18 +2,12 @@ const {DataAnalyzer} = require('../common/DataAnalyzer.js')
 let data = DataAnalyzer.strs("2021/day6.txt")
 
 
-function build() {
-    fish = new Map()
-    for (let i = 0; i <= 8; ++i) { fish[i] = 0 }
-    return fish
-}
-
-function meta(input, days, length=5000000, cycle=6, birth=8) {
-    let school = build()
+function meta(input, days, cycle=6, birth=8) {
+    let school = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
     input.forEach(x => { school[x] ++ })
     
     for (let i = 0; i < days; ++i) {
-        let eggs = build()
+        let eggs = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
 
         //WTH NOT WORKING??? school.forEach((count, age) => {
         for (let age = 0; age <= 8; ++age) {
