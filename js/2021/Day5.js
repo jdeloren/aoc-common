@@ -12,7 +12,7 @@ function calc(diag=false, size=999) {
 
     let count = 0, grid = Array.from(Array(size), () => Array(size).fill(0))
     coords.forEach( x => {
-        let a = x[0], b = x[1], c = x[2], d = x[3]
+        const a = x[0], b = x[1], c = x[2], d = x[3]
         if (a === c) {
             if (b > d) {
                 for (let i = d; i <= b; ++i)
@@ -31,7 +31,7 @@ function calc(diag=false, size=999) {
             }
         } else if (Math.abs(a - c) === Math.abs(b - d)) {
             if (diag) {
-                let f1 = a < c ? 1 : -1, f2 = b < d ? 1 : -1
+                const f1 = a < c ? 1 : -1, f2 = b < d ? 1 : -1
                 for (let n = 0, i = a, j = b; n <= Math.abs(a - c); n++, i += 1*f1, j += 1*f2) {
                     grid[j][i] += 1
                 }    
