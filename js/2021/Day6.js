@@ -23,10 +23,7 @@ function meta(input, days, cycle=6, birth=8) {
         school = eggs
     }
 
-    let fish = 0
-    for (let age = 0; age <= 8; ++age) { fish += school[age] }
-
-    return fish
+    return Object.values(school).reduce((sum, x) => sum + x)
 }
 
 function one() {
