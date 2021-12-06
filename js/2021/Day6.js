@@ -9,7 +9,6 @@ function meta(input, days, cycle=6, birth=8) {
     for (let i = 0; i < days; ++i) {
         let eggs = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
 
-        //WTH NOT WORKING??? school.forEach((count, age) => {
         for (let age = 0; age <= 8; ++age) {
             let count = school[age]
             if (age == 0) {
