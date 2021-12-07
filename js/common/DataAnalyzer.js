@@ -2,17 +2,19 @@ const RESOURCE_ROOT = "../../resources/";
 
 class DataAnalyzer {
     static ints(path) {
-        var fs = require('fs');
-        var text = fs.readFileSync(RESOURCE_ROOT + path, "utf8").split('\n');
-
-        return text.map( function(i) { return parseInt(i, 10) } );
+        var text = require('fs').readFileSync(RESOURCE_ROOT + path, "utf8").split('\n');
+        return text.map( i => parseInt(i, 10) );
     }
 
     static strs(path) {
-        var fs = require('fs');
-        var text = fs.readFileSync(RESOURCE_ROOT + path, "utf8").split('\n');
+        return require('fs').readFileSync(RESOURCE_ROOT + path, "utf8").split('\n');
+    }
 
-        return text.map( function(i) { return i } );
+    static intcsv(path) {
+        let data = require('fs').readFileSync(RESOURCE_ROOT + path, "utf8").split('\n');
+        let ints = []
+        data[0].split(',').forEach(i => {ints.push(parseInt(i))})
+        return ints
     }
 }
 
