@@ -7,11 +7,7 @@ function pos(x, y) { return [...Array(Math.abs(y - x)).keys()].reduce((sum, x) =
 
 function calc(cost, least=999999999, position=-1) {
     for (let i = 0; i < data.length; ++i) {
-        // let sum = data.reduce((sum, x) => sum + cost(i, x))
-        let sum = 0
-        for (let j = 0; j < data.length; ++j) {
-            sum += cost(i, data[j])
-        }
+        let sum = data.reduce((sum, x) => sum + cost(i, x), 0)
 
         if (sum < least) {
             position = i, least = sum
