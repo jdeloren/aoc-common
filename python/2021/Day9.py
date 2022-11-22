@@ -2,14 +2,6 @@ import sys
 from common import DataAnalyzer
 
 
-test = [
-    '2199943210',
-    '3987894921',
-    '9856789892',
-    '8767896789',
-    '9899965678'
-]
-
 def survey(data, x, y):
     points = []
     if x > 0:
@@ -33,7 +25,6 @@ def low_points(map):
     return points
 
 def trek(map, x, y, basin, max=9):
-    # print(f"TREK @ {x},{y} <= {map[x][y]}")
     basin.update([(x,y)])
     height = map[x][y]
 
@@ -53,27 +44,13 @@ def trek(map, x, y, basin, max=9):
     return basin
 
 def basins(map, surveyor=low_points):
-    def bprint(basin):
-        st = '\033[4m'
-        ed = '\033[0m'
-        for i in range(len(map)):
-            for j in range(len(map[i])):
-                if (i,j) in basin:
-                    print(st+str(map[i][j])+ed, end="")
-                else:
-                    print(map[i][j], end="")
-            print()
-    
     basins = []
     points = surveyor(map)
     for p in points:
         basin = trek(map, p[0], p[1], set())
-        # print(f"BASIN: {basin}")
-        # bprint(basin)
         basins.append(len(basin))
     
     import heapq, numpy
-    # print(f"BASINS: {heapq.nlargest(3, basins)}  <== {basins}")
     return numpy.prod(heapq.nlargest(3, basins))
 
 def score(map, surveyor=low_points):
