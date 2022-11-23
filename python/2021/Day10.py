@@ -6,11 +6,7 @@ def missteps(direction):
         return 0
     
     map = {')': 3, ']': 57, '}': 1197, '>': 25137}
-
-    if direction in map.keys():
-        return map[direction]
-    
-    return 0
+    return map.get(direction, 0)
 
 def incomplete(directions):
     total = 0
