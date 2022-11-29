@@ -2,11 +2,8 @@ import sys
 from common import DataAnalyzer
 
 
-def step_val():
-    return 1
-
-def increment(v):
-    return v + step_val()
+def increment(v, tick=1):
+    return v + tick
 
 def reset(v, flashpoint):
     return v if v <= flashpoint else 0
@@ -15,7 +12,7 @@ def mprint(octopi):
     [print(''.join(map(str,v))) for v in octopi]
     print()
 
-def cycler(octopi, steps=100, flashpoint=9, blinders=False):
+def cycler(octopi, steps=100, flashpoint=9, step=1, blinders=False):
 
     def flashing(octopi):
         blinks = set()
@@ -26,22 +23,22 @@ def cycler(octopi, steps=100, flashpoint=9, blinders=False):
         return blinks
     
     def flash(handled, blinking=set()):
-        def step(x, y):
+        def stepper(x, y):
             try:
                 if x >= 0 and y >= 0:
-                    octopi[x][y] += step_val()
+                    octopi[x][y] += step
             except:
                 pass
         
         for x, y in blinking:
-            step(x-1, y-1)
-            step(x-1, y)
-            step(x-1, y+1)
-            step(x, y-1)
-            step(x, y+1)
-            step(x+1, y-1)
-            step(x+1, y)
-            step(x+1, y+1)
+            stepper(x-1, y-1)
+            stepper(x-1, y)
+            stepper(x-1, y+1)
+            stepper(x, y-1)
+            stepper(x, y+1)
+            stepper(x+1, y-1)
+            stepper(x+1, y)
+            stepper(x+1, y+1)
 
         return handled.symmetric_difference(flashing(octopi))
     
@@ -55,7 +52,7 @@ def cycler(octopi, steps=100, flashpoint=9, blinders=False):
 
     for _ in range(steps):
         counter += 1
-        octopi = [[increment(j) for j in i] for i in octopi]
+        octopi = [[increment(j, step) for j in i] for i in octopi]
 
         handled = set()
         running = flashing(octopi)
