@@ -16,10 +16,7 @@ def cycler(octopi, steps=100, flashpoint=9, step=1, blinders=False):
 
     def flashing(octopi):
         blinks = set()
-        for i in range(len(octopi)):
-            for j in range(len(octopi)):
-                if octopi[i][j] > flashpoint:
-                    blinks.update([(i, j)])
+        [[blinks.update([(i, j)]) for j, y in enumerate(x) if y > flashpoint] for i, x in enumerate(octopi)]
         return blinks
     
     def flash(handled, blinking=set()):
@@ -47,8 +44,7 @@ def cycler(octopi, steps=100, flashpoint=9, step=1, blinders=False):
         return all(x == 0 for x in itertools.chain(*octopi))
 
 
-    flashes = 0
-    counter = 0
+    flashes = counter = 0
 
     for _ in range(steps):
         counter += 1
