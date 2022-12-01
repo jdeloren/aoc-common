@@ -4,7 +4,7 @@ from common import DataAnalyzer
 input = DataAnalyzer.text("2022/day1.txt")
 
 def most(menu):
-    indices = [index for index, item in enumerate(menu, start=1) if item == max(menu)]
+    indices = [n for n, item in enumerate(menu, start=1) if item == max(menu)]
     return indices, menu[indices[0]-1]
 
 def top(menu, count=3):
