@@ -8,7 +8,7 @@ def most(menu):
     return indices, menu[indices[0]-1]
 
 def top(menu, count=3):
-    return sum(sorted(menu, reverse=True)[:count])
+    return sum(sorted(menu)[-count:])
 
 def count(data, counter=most):
     from itertools import groupby
