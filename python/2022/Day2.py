@@ -3,7 +3,7 @@ from common import DataAnalyzer
 
 input = DataAnalyzer.text("2022/day2.txt")
 
-def play(data, splashback=False):
+def play(data, soak=False):
 
     def hose_soaker(rounds):
         p1 = {'A' : 'R', 'B': 'P', 'C': 'S'}
@@ -14,7 +14,7 @@ def play(data, splashback=False):
 
         score = 0
 
-        def spray(cpu, player):
+        def splashback(cpu, player):
             if player == 'Y':
                 return cpu
             elif player == 'X':
@@ -24,7 +24,7 @@ def play(data, splashback=False):
 
         for i in rounds:
             a = p1[i[0]]
-            b = p2[i[1]] if not splashback else spray(a, i[1])
+            b = p2[i[1]] if not soak else splashback(a, i[1])
 
             if a == b:
                 score += play[b] + 3
@@ -37,7 +37,7 @@ def play(data, splashback=False):
 
 
 def second():
-    print(f"(2022 2.2) nothing beats that! => {play(input, splashback=True)}")
+    print(f"(2022 2.2) nothing beats that! => {play(input, soak=True)}")
 
 def first():
     print(f"(2022 2.1) good ol' rock => {play(input)}")
