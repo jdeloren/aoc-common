@@ -33,9 +33,7 @@ def play(data, splashback=False):
 
         return score
 
-    rounds = [d.split(' ') for d in data]
-    
-    return hose_soaker(rounds)  # enough with the hose!
+    return hose_soaker([d.split(' ') for d in data])  # enough with the hose!
 
 
 def second():
