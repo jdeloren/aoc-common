@@ -35,10 +35,10 @@ def get_directions(data):
 
     for d in data:
         if ',' in d:
-            mcfly = list(map(int, d.split(',')))
-            coords.append((mcfly[0], mcfly[1]))
-            x = max(x, mcfly[0])
-            y = max(y, mcfly[1])
+            coordinate = list(map(int, d.split(',')))
+            coords.append((coordinate[0], coordinate[1]))
+            x = max(x, coordinate[0])
+            y = max(y, coordinate[1])
         elif len(d) > 0:
             i = d.index('=')
             folds.append((d[i-1], int(d[i+1:])))
@@ -55,7 +55,7 @@ def ben(data, folds=5, scan=False, analyzer=counter):   #musicjokes
 
     marks, steps, x, y = get_directions(data)
     folds = folds if folds > 0 else len(steps)
-    paper = [['.' for _ in range(x+1)] for _ in range(y+1)]
+    paper = np.array([['.' for _ in range(x+1)] for _ in range(y+1)])
 
     cover = lambda i, j: '#' if i == '#' or j == '#' else '.'
 
@@ -64,6 +64,8 @@ def ben(data, folds=5, scan=False, analyzer=counter):   #musicjokes
         print()
 
     def fold(a, b):
+        # mprint(a)
+        # mprint(b)
         b = np.flipud(b)
         return [[cover(xx, yy) for xx, yy in zip(x, y)] for x, y in zip(a, b)]
 
@@ -71,23 +73,19 @@ def ben(data, folds=5, scan=False, analyzer=counter):   #musicjokes
         paper[j][i] = '#'
     
     # print(f'PAPER DIMENSIONS: {len(paper[0])} x {len(paper)}')
-    paper = np.array(paper)
 
     for _, instruction in zip(range(folds), steps):
         if instruction[0] == 'x':
             rotated = np.rot90(paper, axes=(1, 0))
             cutline = instruction[1]
             # print(f'X CUT {cutline} {cutline+len(paper)%2} {len(rotated) % 2}')
-            # mprint(rotated[:cutline])
-            # mprint(rotated[cutline+len(paper)%2:])
             paper = fold(rotated[:cutline], rotated[cutline+len(paper[0])%2:])
             paper = np.rot90(paper)
         else:
             cutline = instruction[1]
             # print(f'Y CUT {cutline} {cutline+len(paper[0])%2} {len(paper) % 2}')
-            # mprint(paper[:cutline])
-            # mprint(paper[cutline+len(paper[0])%2:])
             paper = fold(paper[:cutline], paper[cutline+len(paper[0])%2:])
+        
         # mprint(paper)
         # print(f"NEW SIZE: CUT {instruction[1]} {len(paper[0])} x {len(paper)}")
     
