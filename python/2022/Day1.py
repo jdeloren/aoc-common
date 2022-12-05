@@ -1,5 +1,5 @@
 import sys
-from common import DataAnalyzer
+from common import DataAnalyzer, Solver
 
 input = DataAnalyzer.text("2022/day1.txt")
 
@@ -23,16 +23,5 @@ def second():
 def first():
     print(f"(2022 1.1) calorie counter => {count(input)}")
 
-
-def solve(puzzle):
-    if puzzle == '1':
-        first()
-    elif puzzle == '2':
-        second()
-    else:
-        first()
-        second()
-
-
 if __name__ == '__main__':
-    solve(sys.argv[1])
+    Solver.solve(sys.argv[1], first, second)
