@@ -3,8 +3,7 @@ from common import DataAnalyzer, Solver
 
 input = DataAnalyzer.text("2022/day4.txt")
 
-def overlap(x, y, check=any):
-    return 1 if check(item in x for item in y) or check(item in y for item in x) else 0
+overlap = lambda x, y, check=any: 1 if check(item in x for item in y) or check(item in y for item in x) else 0
 
 def assignments(data, check=all):
     count = 0
