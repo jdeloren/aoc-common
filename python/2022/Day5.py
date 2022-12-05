@@ -10,12 +10,9 @@ def pop(list, count):
 
 def arrange(data, reverse=True):
     instructions = False
-    crates = []
-    moves = []
 
-    # build crates
-    for i in range(int(len(data[0]) / 4)+1):
-        crates.append([])    
+    crates, moves = ([] for _ in range(2))
+    [crates.append([]) for _ in range(int(len(data[0]) / 4)+1)]
 
     for row in data:
         if not instructions:
