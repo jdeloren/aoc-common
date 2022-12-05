@@ -15,7 +15,7 @@ def assignments(data, check=all):
         r2 = [eval(i) for i in elves[1].split('-')]
         l1 = list(range(r1[0], r1[1]+1))
         l2 = list(range(r2[0], r2[1]+1))
-        count += overlap(l1, l2, check) or overlap(l2, l1, check)
+        count += overlap(l1, l2, check)
 
     return count
 
