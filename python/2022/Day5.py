@@ -10,18 +10,9 @@ def pop(list, count):
 
 def arrange(data, reverse=True):
     instructions = False
-    crates = []
-    moves = []
 
-    def tops(crates):
-        toppers = ''
-        for crate in crates:
-            toppers += crate[0]
-        return toppers
-
-    # build crates
-    for i in range(int(len(data[0]) / 4)+1):
-        crates.append([])    
+    crates, moves = ([] for _ in range(2))
+    [crates.append([]) for _ in range(int(len(data[0]) / 4)+1)]
 
     for row in data:
         if not instructions:
@@ -40,8 +31,8 @@ def arrange(data, reverse=True):
         if reverse:
             boxes.reverse()
         crates[int(steps[5])-1][:0] = boxes
-    
-    return tops(crates)
+
+    return ''.join([c[0] for c in crates])
 
 def second():
     print(f"(2022 5.2) top crates CM9001 => {arrange(input, False)}")
