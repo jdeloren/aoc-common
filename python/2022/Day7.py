@@ -30,7 +30,7 @@ class Filesystem:
                     break
     
     def tree(self):
-        self._root.stat()
+        self._root.stat(0)
 
     def du(self):
         return [dir.du() for dir in self._root._dirs]
@@ -63,7 +63,6 @@ class Node:
 
         self._dirs = []
         self._files = []
-        self._depth = 0 if parent == None else parent._depth + 1
         self.__size__ = size
     
     def __len__(self):
@@ -80,11 +79,11 @@ class Node:
         [x.extend(dir.du()) for dir in self._dirs]
         return x
 
-    def stat(self):
+    def stat(self, depth):
         typeinfo = ' (' + (f'dir size={len(self)}' if not self.file() else 'file, size=' + str(len(self))) + ')'
-        print('  '*self._depth + ' - ' + self.name + typeinfo)
+        print('  '*depth + ' - ' + self.name + typeinfo)
         for node in self.nodes():
-            node.stat()
+            node.stat(depth+1)
 
 filesystem = None
 
