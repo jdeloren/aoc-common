@@ -106,7 +106,7 @@ def run(input, cmd):
         if i.startswith('$ '):
             if 'cd ' in i:
                 filesystem.cd(i.split(' ')[2])
-        else:
+        else:  # ls output
             if i.startswith('dir '):
                 filesystem.mkdir(i.split(' ')[1])
             else:
