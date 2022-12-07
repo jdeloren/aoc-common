@@ -25,7 +25,7 @@ class Filesystem:
         if name == '/':
             self._cwd = self._root
         elif name == '..':
-            self._cwd = self._cwd.parent        
+            self._cwd = self._cwd.parent
         else:
             for dir in self._cwd._dirs:
                 if dir.name == name:
@@ -35,12 +35,12 @@ class Filesystem:
     def tree(self):
         self._root.stat()
 
+    def du(self):
+        return [dir.du() for dir in self._root._dirs]
+    
     def syscheck(self, limit=100000):
         dirs = [item for subs in self.du() for item in subs]
         return sum([x[1] for x in dirs if x[1] <= limit])
-    
-    def du(self):
-        return [dir.du() for dir in self._root._dirs]
     
     def update(self):
         if self._partition_size - len(self._root) < self._update_partition_size:
@@ -53,7 +53,7 @@ class Filesystem:
                 if dir[1] >= diff:
                     return dir
         
-        return ('', '-1')
+        return ('', -1)
     
     def __len__(self):
         return len(self._root)
