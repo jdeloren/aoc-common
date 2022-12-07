@@ -29,17 +29,13 @@ class Filesystem:
     def tree(self):
         self._root.stat(0)
 
-    def du(self):
-        return [dir.du() for dir in self._root._dirs]
-    
     def syscheck(self, limit=100000):
-        dirs = [item for subs in self.du() for item in subs]
-        return sum([x[1] for x in dirs if x[1] <= limit])
+        return sum([x[1] for x in self._root.du() if x[1] <= limit])
     
     def update(self):
         if self._partition_size - len(self._root) < self._update_partition_size:
             diff = self._update_partition_size - (self._partition_size - len(self._root))
-            dirs = [item for subs in self.du() for item in subs]
+            dirs = self._root.du()
             from operator import itemgetter
             dirs.sort(key=itemgetter(1))
 
