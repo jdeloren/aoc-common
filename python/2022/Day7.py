@@ -80,7 +80,7 @@ class Node:
         return x
 
     def stat(self, depth):
-        typeinfo = ' (' + (f'dir size={len(self)}' if not self.file() else 'file, size=' + str(len(self))) + ')'
+        typeinfo = ' (dir)' if not self.file() else f' (file, size={len(self)})'
         print('  '*depth + ' - ' + self.name + typeinfo)
         [node.stat(depth+1) for node in self.nodes()]
 
