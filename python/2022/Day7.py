@@ -24,10 +24,7 @@ class Filesystem:
         elif name == '..':
             self._cwd = self._cwd.parent
         else:
-            for dir in self._cwd._dirs:
-                if dir.name == name:
-                    self._cwd = dir
-                    break
+            self._cwd = [dir for dir in self._cwd._dirs if dir.name == name][0]
     
     def tree(self):
         self._root.stat(0)
