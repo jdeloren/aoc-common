@@ -37,6 +37,8 @@ class Filesystem:
         self._root.stat()
 
     def syscheck(self, limit=100000):
+        dirs = [item for subs in self.du() for item in subs]
+        print(f"CHECK: {dirs}")
         size = 0
         self._registry_size = 0
 
