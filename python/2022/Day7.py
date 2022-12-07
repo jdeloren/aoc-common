@@ -82,8 +82,7 @@ class Node:
     def stat(self, depth):
         typeinfo = ' (' + (f'dir size={len(self)}' if not self.file() else 'file, size=' + str(len(self))) + ')'
         print('  '*depth + ' - ' + self.name + typeinfo)
-        for node in self.nodes():
-            node.stat(depth+1)
+        [node.stat(depth+1) for node in self.nodes()]
 
 filesystem = None
 
