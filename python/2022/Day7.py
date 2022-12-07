@@ -19,8 +19,7 @@ class Filesystem:
         self._cwd._dirs.append(Node(name, self._cwd))
     
     def touch(self, name, size):
-        file = Node(name, self._cwd)
-        file.__size__ = size
+        file = Node(name, self._cwd, size=size)
         self._cwd._files.append(file)
     
     def cd(self, name):
@@ -67,14 +66,14 @@ class Filesystem:
 
 
 class Node:
-    def __init__(self, name='', parent=None):
+    def __init__(self, name='', parent=None, size=0):
         self.name = name
         self.parent = parent
 
         self._dirs = []
         self._files = []
         self._depth = 0 if parent == None else parent._depth + 1
-        self.__size__ = 0
+        self.__size__ = size
     
     def __len__(self):
         return self.__size__ if self.file() else sum([len(i) for i in self.nodes()])
