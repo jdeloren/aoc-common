@@ -11,9 +11,6 @@ class Filesystem:
         self._partition_size = 70000000
         self._update_partition_size = 30000000
     
-    def dir(self):
-        return self._cwd
-    
     def mkdir(self, name):
         self._cwd._dirs.append(Node(name, self._cwd))
     
