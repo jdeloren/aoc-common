@@ -11,9 +11,6 @@ class Filesystem:
         self._partition_size = 70000000
         self._update_partition_size = 30000000
     
-    def dir(self):
-        return self._cwd
-    
     def mkdir(self, name):
         self._cwd._dirs.append(Node(name, self._cwd))
     
@@ -25,27 +22,20 @@ class Filesystem:
         if name == '/':
             self._cwd = self._root
         elif name == '..':
-            self._cwd = self._cwd.parent        
+            self._cwd = self._cwd.parent
         else:
-            for dir in self._cwd._dirs:
-                if dir.name == name:
-                    self._cwd = dir
-                    break
+            self._cwd = [dir for dir in self._cwd._dirs if dir.name == name][0]
     
     def tree(self):
-        self._root.stat()
+        self._root.stat(0)
 
     def syscheck(self, limit=100000):
-        dirs = [item for subs in self.du() for item in subs]
-        return sum([x[1] for x in dirs if x[1] <= limit])
-    
-    def du(self):
-        return [dir.du() for dir in self._root._dirs]
+        return sum([x[1] for x in self._root.du() if x[1] <= limit])
     
     def update(self):
         if self._partition_size - len(self._root) < self._update_partition_size:
             diff = self._update_partition_size - (self._partition_size - len(self._root))
-            dirs = [item for subs in self.du() for item in subs]
+            dirs = self._root.du()
             from operator import itemgetter
             dirs.sort(key=itemgetter(1))
 
@@ -53,7 +43,7 @@ class Filesystem:
                 if dir[1] >= diff:
                     return dir
         
-        return ('', '-1')
+        return ('', -1)
     
     def __len__(self):
         return len(self._root)
@@ -66,7 +56,6 @@ class Node:
 
         self._dirs = []
         self._files = []
-        self._depth = 0 if parent == None else parent._depth + 1
         self.__size__ = size
     
     def __len__(self):
@@ -83,11 +72,10 @@ class Node:
         [x.extend(dir.du()) for dir in self._dirs]
         return x
 
-    def stat(self):
-        typeinfo = ' (' + (f'dir size={len(self)}' if not self.file() else 'file, size=' + str(len(self))) + ')'
-        print('  '*self._depth + ' - ' + self.name + typeinfo)
-        for node in self.nodes():
-            node.stat()
+    def stat(self, depth):
+        typeinfo = ' (dir)' if not self.file() else f' (file, size={len(self)})'
+        print('  '*depth + ' - ' + self.name + typeinfo)
+        [node.stat(depth+1) for node in self.nodes()]
 
 filesystem = None
 
