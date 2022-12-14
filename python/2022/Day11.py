@@ -23,7 +23,7 @@ class Monkey:   # ... that funky monkey!
             self._inspections += 1
             item = int(self._items.pop(0))
             worry = self.inspect(item)
-            worry = (worry // 3 if self._calming else worry % multiple)
+            worry = (worry // 3 if not self._calming else worry % multiple)
             monkeys[self.throw(worry)].catch(worry)
 
     def inspect(self, worry):
@@ -45,7 +45,7 @@ class Monkey:   # ... that funky monkey!
         self._items.append(item)
 
 
-def play(data, rounds, calming=True):
+def play(data, rounds, calming=False):
     global monkeys
     monkeys = []
 
@@ -73,7 +73,7 @@ def play(data, rounds, calming=True):
 
 
 def second():
-    print(f"(2022 11.2) monkey business => {play(input, 10000, False)}")
+    print(f"(2022 11.2) monkey business => {play(input, 10000, True)}")
 
 def first():
     print(f"(2022 11.1) monkey business => {play(input, 20)}")
