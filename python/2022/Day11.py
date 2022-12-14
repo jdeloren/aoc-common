@@ -68,10 +68,8 @@ def play(data, rounds, calming=True):
         for m in monkeys:
             m.play(multiple)
 
-    inspections = [m._inspections for m in monkeys]
-
     import heapq, numpy
-    return numpy.prod(heapq.nlargest(2, inspections))
+    return numpy.prod(heapq.nlargest(2, [m._inspections for m in monkeys]))
 
 
 def second():
