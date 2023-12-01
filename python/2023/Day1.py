@@ -6,11 +6,11 @@ input = DataAnalyzer.text("2023/day1.txt")
 
 def tune(data):
     import re
-    codex = {'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9}
+    codex = {'one': '1', 'two': '2', 'three': '3', 'four': '4', 'five': '5', 'six': '6', 'seven': '7', 'eight': '8', 'nine': '9'}
     total = 0
     for d in data:
-        tuned = [int(c) if c.isdigit() else codex[c] for c in re.findall(r'(?=(\d|one|two|three|four|five|six|seven|eight|nine))', d)]
-        total += tuned[0] * 10 + tuned[-1]
+        tuned = [c if c.isdigit() else codex[c] for c in re.findall(r'(?=(\d|one|two|three|four|five|six|seven|eight|nine))', d)]
+        total += int(tuned[0] + tuned[-1])
     return total
 
 def calibrate(data):
