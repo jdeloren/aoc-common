@@ -35,23 +35,25 @@ def track(data):
             return path[:] + [(x,y)]
         
         for path in paths:
-            if len(path) <= 80 and map[path[-1][0]][path[-1][1]] != end:
-                added = False
-                if map[path[-1]] not in 'Sab' and spot(path[-1][0]-1, path[-1][1], path):
-                    added = True
-                    extended.append(extender(path, path[-1][0]-1, path[-1][1]))
-                if spot(path[-1][0]+1, path[-1][1], path):
-                    added = True
-                    extended.append(extender(path, path[-1][0]+1, path[-1][1]))
-                if spot(path[-1][0], path[-1][1]-1, path):
-                    added = True
-                    extended.append(extender(path, path[-1][0], path[-1][1]-1))
-                if spot(path[-1][0], path[-1][1]+1, path):
-                    added = True
-                    extended.append(extender(path, path[-1][0], path[-1][1]+1))
+            if map[path[-1][0]][path[-1][1]] == end or len(path) >= 80:
+                break
 
-                if not added:
-                    dead.append(path[-1])
+            added = False
+            if map[path[-1]] not in 'Sab' and spot(path[-1][0]-1, path[-1][1], path):
+                added = True
+                extended.append(extender(path, path[-1][0]-1, path[-1][1]))
+            if spot(path[-1][0]+1, path[-1][1], path):
+                added = True
+                extended.append(extender(path, path[-1][0]+1, path[-1][1]))
+            if spot(path[-1][0], path[-1][1]-1, path):
+                added = True
+                extended.append(extender(path, path[-1][0], path[-1][1]-1))
+            if spot(path[-1][0], path[-1][1]+1, path):
+                added = True
+                extended.append(extender(path, path[-1][0], path[-1][1]+1))
+
+            if not added:
+                dead.append(path[-1])
 
         if len(dead) > 0:
             prune = []
@@ -66,6 +68,7 @@ def track(data):
 
         if len(extended) > 0:
             paths.extend(traverse(map, extended, deadzones, end))
+            paths = [list(i) for i in set(tuple(i) for i in paths)]
 
         return paths
 
@@ -90,9 +93,6 @@ def track(data):
         end = np.where(map == enders[i+1])
         end = [(m,n) for m,n in zip(end[0], end[1])]
         
-        starter = set()
-        starter.update([start])
-        
         paths = traverse(map, [[start]], end=enders[i+1])
         paths = [x for x in paths if x[-1] in end]
 
@@ -107,7 +107,7 @@ def second():
     print(f"(2022 12.2) monkey business => {True}")
 
 def first():
-    print(f"(2022 12.1) minimal steps to summit => {track(test)}")
+    print(f"(2022 12.1) minimal steps to summit => {track(input)}")
 
 if __name__ == '__main__':
     Solver.solve(sys.argv[1], first, second)
