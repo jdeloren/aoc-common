@@ -12,40 +12,30 @@ test_data = [
     'Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green',
 ]
 
-def power(data: List[str]):
-    power = 0
-    for d in data:
-        bag = {'red': 0, 'green': 0, 'blue': 0}
-        for num, col in re.findall(r'(\d+) (\w+)', d):
-            bag[col] = max(bag[col], int(num))
-        power += math.prod(bag.values())
+def power(data: str) -> int:
+    bag = {'red': 0, 'green': 0, 'blue': 0}
+    for num, col in re.findall(r'(\d+) (\w+)', data):
+        bag[col] = max(bag[col], int(num))
+    return math.prod(bag.values())
 
-    return power
-
-def counter(data: List[str]):
+def counter(data: str) -> int:
     config = {'red': 12, 'green': 13, 'blue': 14}
-    games = []
+    meta = data.split(':')
+    valid = True        
 
-    for d in data:
-        meta = d.split(':')
-        valid = True        
+    for num, col in re.findall(r'(\d+) (\w+)', data):
+        if max(config[col], int(num)) != config[col]:
+            valid = False
 
-        for num, col in re.findall(r'(\d+) (\w+)', d):
-            if max(config[col], int(num)) != config[col]:
-                valid = False
-
-        if valid:
-            games.append(int(meta[0].split()[1]))
-    
-    return sum(games)
+    return int(meta[0].split()[1]) if valid else 0
 
 def second():
-    print(f"(2023 2.0) score => {power(test_data)}")
-    print(f"(2023 2.1) score => {power(input)}")
+    print(f"(2023 2.0) score => {sum(map(power, test_data))}")
+    print(f"(2023 2.1) score => {sum(map(power, input))}")
 
 def first():
-    print(f"(2023 1.0) score => {counter(test_data)}")
-    print(f"(2023 1.1) score => {counter(input)}")
+    print(f"(2023 1.0) score => {sum(map(counter, test_data))}")
+    print(f"(2023 1.1) score => {sum(map(counter, input))}")
 
 if __name__ == '__main__':
     Solver.solve(sys.argv[1], first, second)
