@@ -21,11 +21,11 @@ def calibrate(data):
     return val
 
 def second():
-    print(f"(2023 2.0) calibration value => {tune(['two1nine', 'eightwothree', 'abcone2threexyz', 'xtwone3four','4nineeightseven2', 'zoneight234', '7pqrstsixteen'])}")
-    print(f"(2023 2.1) calibration value => {tune(input)}")
+    print(f"(2023 1.2) calibration value => {tune(['two1nine', 'eightwothree', 'abcone2threexyz', 'xtwone3four','4nineeightseven2', 'zoneight234', '7pqrstsixteen'])}")
+    print(f"(2023 1.2) calibration value => {tune(input)}")
 
 def first():
-    print(f"(2023 1.0) calibration value => {calibrate(['1abc2', 'pqr3stu8vwx', 'a1b2c3d4e5f', 'treb7ychet'])}")
+    print(f"(2023 1.1) calibration value => {calibrate(['1abc2', 'pqr3stu8vwx', 'a1b2c3d4e5f', 'treb7ychet'])}")
     print(f"(2023 1.1) calibration value => {calibrate(input)}")
 
 if __name__ == '__main__':
