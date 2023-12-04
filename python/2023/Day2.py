@@ -21,7 +21,7 @@ def power(data: str) -> int:
 def counter(data: str) -> int:
     config = {'red': 12, 'green': 13, 'blue': 14}
     meta = data.split(':')
-    valid = True        
+    valid = True
 
     for num, col in re.findall(r'(\d+) (\w+)', data):
         if max(config[col], int(num)) != config[col]:
