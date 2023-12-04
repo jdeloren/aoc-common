@@ -21,7 +21,7 @@ def power(data: str) -> int:
 def counter(data: str) -> int:
     config = {'red': 12, 'green': 13, 'blue': 14}
     meta = data.split(':')
-    valid = True        
+    valid = True
 
     for num, col in re.findall(r'(\d+) (\w+)', data):
         if max(config[col], int(num)) != config[col]:
@@ -34,8 +34,8 @@ def second():
     print(f"(2023 2.1) score => {sum(map(power, input))}")
 
 def first():
-    print(f"(2023 1.0) score => {sum(map(counter, test_data))}")
-    print(f"(2023 1.1) score => {sum(map(counter, input))}")
+    print(f"(2023 2.0) score => {sum(map(counter, test_data))}")
+    print(f"(2023 2.1) score => {sum(map(counter, input))}")
 
 if __name__ == '__main__':
     Solver.solve(sys.argv[1], first, second)
