@@ -30,11 +30,11 @@ def counter(data: str) -> int:
     return int(meta[0].split()[1]) if valid else 0
 
 def second():
-    print(f"(2023 2.0) score => {sum(map(power, test_data))}")
-    print(f"(2023 2.1) score => {sum(map(power, input))}")
+    print(f"(2023 2.2) score => {sum(map(power, test_data))}")
+    print(f"(2023 2.2) score => {sum(map(power, input))}")
 
 def first():
-    print(f"(2023 2.0) score => {sum(map(counter, test_data))}")
+    print(f"(2023 2.1) score => {sum(map(counter, test_data))}")
     print(f"(2023 2.1) score => {sum(map(counter, input))}")
 
 if __name__ == '__main__':
