@@ -20,12 +20,12 @@ def long_parse(data: List[str]) -> int:
     return race(int(''.join(data[0].split(':')[1].split())), int(''.join(data[1].split(':')[1].split())))
 
 def second():
-    print(f"(2023 5.2) score => {long_parse(test_data)}")
-    print(f"(2023 5.2) score => {long_parse(input)}")
+    print(f"(2023 6.2) score => {long_parse(test_data)}")
+    print(f"(2023 6.2) score => {long_parse(input)}")
 
 def first():
-    print(f"(2023 5.1) score => {parse(test_data)}")
-    print(f"(2023 5.1) score => {parse(input)}")
+    print(f"(2023 6.1) score => {parse(test_data)}")
+    print(f"(2023 6.1) score => {parse(input)}")
 
 if __name__ == '__main__':
     Solver.solve(sys.argv[1], first, second)
