@@ -11,9 +11,8 @@ test_data = [
 
 
 def build_stack(data) -> List[List[int]]:
-    ints = [int(d) for d in data.split()]
-    diffs = [ints[i+1] - ints[i] for i in range(len(ints) - 1)]
-    stack = [ints.copy()]
+    stack = [[int(d) for d in data.split()]]
+    diffs = [stack[0][i+1] - stack[0][i] for i in range(len(stack[0]) - 1)]
     stack.append(diffs.copy())
 
     while not all(i == 0 for i in diffs):
